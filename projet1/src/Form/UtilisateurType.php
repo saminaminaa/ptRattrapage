@@ -18,9 +18,6 @@ class UtilisateurType extends AbstractType
             ->add('Nom', TextType::class)
             ->add('Prenom', TextType::class)
             ->add('Email', TextType::class)
-            ->add('role', EntityType::class,
-            array( 'class' => 'App\Entity\Role',
-            'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class)
         ;
     }

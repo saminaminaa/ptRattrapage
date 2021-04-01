@@ -14,8 +14,7 @@ class InscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('roles')
+        $builder 
             ->add('email',EmailType::class)
             ->add('password',PasswordType::class)
             ->add('inscrire',SubmitType::class)

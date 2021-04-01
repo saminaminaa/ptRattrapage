@@ -32,25 +32,12 @@ class Utilisateur
      */
     private $Prenom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Email;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="utilisateurs")
-     */
-    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity=Rattrapage::class, mappedBy="surveillant")
      */
     private $rattrapages;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, mappedBy="utilisateur", cascade={"persist", "remove"})
@@ -91,30 +78,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-
-    public function setEmail(string $Email): self
-    {
-        $this->Email = $Email;
-
-        return $this;
-    }
-
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Rattrapage[]
      */
@@ -141,18 +104,6 @@ class Utilisateur
                 $rattrapage->setSurveillant(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }

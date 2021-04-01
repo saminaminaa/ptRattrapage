@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\InscriptionType;
 
 
 class AccueilController extends AbstractController
@@ -33,7 +34,6 @@ class AccueilController extends AbstractController
         if ($request->isMethod('POST')) {            
             $form->handleRequest($request);            
             if ($form->isSubmitted() && $form->isValid()) {
-                $mdpConf = $form->get('confirmation')->getData();
                 $mdp = $user->getPassword();
                 $user->setRoles(array('ROLE_USER'));
                 $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
