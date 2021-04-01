@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent()}} - Ajout Eleve{% endblock %}
+{% block content %}
+
+ <div class="container-fluid">
+ <div class="row justify-content-center">
+ <h1 class="text-center text-primary p-4"> Ajouter un eleve</h1>
+ </div>
+ <div class="row justify-content-center">
+ <div class="col-12 bg-white p-4 m-0 text-primary">
+ {{ form_start(form) }}
+<div class="form-group">
+ {{ form_label(form.Prenom, 'Prénom (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group">
+ {{ form_label(form.Nom, 'Nom (*) ', {'label_attr':
+{'class': 'font-weight-bold'}}) }}
+ {{ form_widget(form.Nom, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group">
+ {{ form_label(form.Photo, 'Photo (*) ', {'label_attr':
+{'class': 'font-weight-bold'}}) }}
+ {{ form_widget(form.Photo, {'attr': {'class': 'form-control'}}) }}
+ </div>
+  <div class="form-group">
+ {{ form_label(form.classe, 'Classe (*)', {'label_attr': {'class': 'font-weight-bold'}})
+}}
+ {{ form_widget(form.classe, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group mx-auto text-center">
+ {{ form_widget(form.ajouter, { 'label': "Ajouter", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
+ </div>
+ {{ form_end(form) }}
+ </div>
+ </div>
+</div>
+{% endblock %}
