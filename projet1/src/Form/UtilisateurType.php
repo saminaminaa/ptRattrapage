@@ -17,7 +17,6 @@ class UtilisateurType extends AbstractType
         $builder
             ->add('Nom', TextType::class)
             ->add('Prenom', TextType::class)
-            ->add('Email', TextType::class)
             ->add('ajouter', SubmitType::class)
         ;
     }
