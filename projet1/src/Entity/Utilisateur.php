@@ -47,6 +47,16 @@ class Utilisateur
      */
     private $rattrapages;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->rattrapages = new ArrayCollection();
@@ -131,6 +141,40 @@ class Utilisateur
                 $rattrapage->setSurveillant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getUtilisateur() !== $this) {
+            $user->setUtilisateur($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }
