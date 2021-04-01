@@ -85,14 +85,14 @@ class Rattrapage
         return $this->id;
     }
 
-    public function getPDFcorrige(): ?string
+    public function getPDF(): ?string
     {
-        return $this->PDFcorrige;
+        return $this->PDF;
     }
 
-    public function setPDFcorrige(string $PDFcorrige): self
+    public function setPDF(string $PDF): self
     {
-        $this->PDFcorrige = $PDFcorrige;
+        $this->PDF = $PDF;
 
         return $this;
     }
