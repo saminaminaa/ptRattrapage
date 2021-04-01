@@ -32,20 +32,17 @@ class Utilisateur
      */
     private $Prenom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Email;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="utilisateurs")
-     */
-    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity=Rattrapage::class, mappedBy="surveillant")
      */
     private $rattrapages;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $user;
 
     public function __construct()
     {
@@ -81,30 +78,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-
-    public function setEmail(string $Email): self
-    {
-        $this->Email = $Email;
-
-        return $this;
-    }
-
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Rattrapage[]
      */
@@ -131,6 +104,28 @@ class Utilisateur
                 $rattrapage->setSurveillant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getUtilisateur() !== $this) {
+            $user->setUtilisateur($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }
