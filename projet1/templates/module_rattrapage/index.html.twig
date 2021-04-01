@@ -1,23 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent()}} - Ajout utilisateur{% endblock %}
+{% block title %}{{ parent()}} - Ajout Module Rattrapage{% endblock %}
 {% block content %}
 
  <div class="container-fluid">
  <div class="row justify-content-center">
- <h1 class="text-center text-primary p-4"> Ajouter un utilisateur</h1>
+ <h1 class="text-center text-primary p-4"> Ajouter un module de rattrapage</h1>
  </div>
  <div class="row justify-content-center">
  <div class="col-12 bg-white p-4 m-0 text-primary">
  {{ form_start(form) }}
 <div class="form-group">
- {{ form_label(form.Prenom, 'Prénom (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
- {{ form_widget(form.Prenom, {'attr': {'class': 'form-control'}}) }}
- </div>
- <div class="form-group">
- {{ form_label(form.Nom, 'Nom (*) ', {'label_attr':
-{'class': 'font-weight-bold'}}) }}
- {{ form_widget(form.Nom, {'attr': {'class': 'form-control'}}) }}
+ {{ form_label(form.libelle, 'Libelle de la classe (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
  </div>
  <div class="form-group mx-auto text-center">
  {{ form_widget(form.ajouter, { 'label': "Ajouter", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionType;
 
 
+
 class AccueilController extends AbstractController
 {
     /**
@@ -35,13 +36,16 @@ class AccueilController extends AbstractController
             $form->handleRequest($request);            
             if ($form->isSubmitted() && $form->isValid()) {
                 $mdp = $user->getPassword();
+                $id = $user->getId();
+                $repoUser = $this->getDoctrine()->getRepository(User::class);
+                $verif = $repoUser->findOneBy(array('email'=>$user->getEmail()));
                 $user->setRoles(array('ROLE_USER'));
                 $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
                 $this->addFlash('notice', 'Inscription réussie');
-                return $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('ajoutUtilisateur',array('id'=>$user->getId()));
                 }  
                 
             }

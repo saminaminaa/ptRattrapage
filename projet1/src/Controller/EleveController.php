@@ -5,31 +5,30 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\RattrapageType;
-use App\Entity\Rattrapage;
-use App\Entity\Utilisateur;
+use App\Entity\Eleve;
+use App\Form\EleveType;
 use Symfony\Component\HttpFoundation\Request;
 
-class RattrapageController extends AbstractController
+class EleveController extends AbstractController
 {
     /**
-     * @Route("/rattrapage", name="rattrapage")
+     * @Route("/eleve", name="eleve")
      */
     public function index(Request $request): Response
     {
-        $rattrapage = new Rattrapage();
-        $form = $this->createForm(RattrapageType::class,$rattrapage);
+        $eleve = new Eleve();
+        $form = $this->createForm(EleveType::class,$eleve);
         if ($request->isMethod('POST')) { 
             $form->handleRequest($request); 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($rattrapage);
+                $em->persist($eleve);
                 $em->flush();
-                $this->addFlash('notice', 'Rattrapage inséré');
+                $this->addFlash('notice', 'Eleve inséré');
             }
-            return $this->redirectToRoute('rattrapage');
+            return $this->redirectToRoute('eleve');
         } 
-        return $this->render('rattrapage/index.html.twig', [
+        return $this->render('eleve/index.html.twig', [
         'form'=>$form->createView()
         ]);
     }

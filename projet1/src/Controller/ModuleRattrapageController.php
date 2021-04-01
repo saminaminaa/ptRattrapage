@@ -5,31 +5,30 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\RattrapageType;
-use App\Entity\Rattrapage;
-use App\Entity\Utilisateur;
+use App\Entity\ModuleRattrapage;
+use App\Form\ModuleRattrapageType;
 use Symfony\Component\HttpFoundation\Request;
 
-class RattrapageController extends AbstractController
+class ModuleRattrapageController extends AbstractController
 {
     /**
-     * @Route("/rattrapage", name="rattrapage")
+     * @Route("/module/rattrapage", name="module_rattrapage")
      */
     public function index(Request $request): Response
     {
-        $rattrapage = new Rattrapage();
-        $form = $this->createForm(RattrapageType::class,$rattrapage);
+        $modulerattrapage = new ModuleRattrapage();
+        $form = $this->createForm(ModuleRattrapageType::class,$modulerattrapage);
         if ($request->isMethod('POST')) { 
             $form->handleRequest($request); 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($rattrapage);
+                $em->persist($modulerattrapage);
                 $em->flush();
-                $this->addFlash('notice', 'Rattrapage inséré');
+                $this->addFlash('notice', 'Module de rattrapage inséré');
             }
-            return $this->redirectToRoute('rattrapage');
+            return $this->redirectToRoute('module_rattrapage');
         } 
-        return $this->render('rattrapage/index.html.twig', [
+        return $this->render('module_rattrapage/index.html.twig', [
         'form'=>$form->createView()
         ]);
     }
