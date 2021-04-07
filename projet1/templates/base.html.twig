@@ -16,11 +16,13 @@
       gtag('config', 'UA-23019901-1');
     </script>
 <head>
-    <title>Rattrapage</title>
+    <title> {% block title %}{% endblock %}</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="{{path('accueil')}}">Rattrapage</a>
+  <!--<a class="navbar-brand" href="{{path('accueil')}}"> -->
+  <img src="../templates/Logo_ISPE_Bastien.png" class="img-fluid" width="2%" height="2%" >
+  <!--</a>-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -62,11 +64,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{path('inscrire')}}">Ajout user</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="{{path('inscrire')}}">Ajout utilisateur</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
+          <a class="dropdown-item" href="{{path('liste_utilisateur')}}">Liste utilisateur</a>
         </div>
       </li>
        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -89,20 +89,26 @@
 
     <body>
 
-    <div class="container">
- <div class="row">
- <div class="col-12">
- {% for message in app.flashes('notice') %}
- <div class="flash-notice">
- {{ message }}
- </div>
- {% endfor %}
-
- {% block content %}
- {% endblock %}
- </div>
- </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% for message in app.flashes('notice') %}
+          <div class="flash-notice alert alert-success text-center">
+            {{ message }}
+          </div>
+        {% endfor %}
+   </div>
+  </div>
 </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
 
         {% block body %}{% endblock %}
         {% block javascripts %}

@@ -44,7 +44,7 @@ class AccueilController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
-                $this->addFlash('notice', 'Inscription réussie');
+                // $this->addFlash('notice', 'Inscription réussie');
                 return $this->redirectToRoute('ajoutUtilisateur',array('id'=>$user->getId()));
                 }  
                 
