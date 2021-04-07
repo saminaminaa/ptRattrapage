@@ -57,4 +57,32 @@ class ModuleRattrapageController extends AbstractController
         'modulesrattrapages'=>$modulesrattrapages
         ]);
     }
+
+    /**
+    * @Route("/modif_module_rattrapage/{id}", name="modif_module_rattrapage", requirements={"id"="\d+"})
+    */
+    public function modifModulerattrapage(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoModulerattrapage = $em->getRepository(ModuleRattrapage::class);
+        $modulerattrapage = $repoModulerattrapage->find($id);
+        if($modulerattrapage==null){
+            $this->addFlash('notice', "Ce module de rattrapage n'existe pas");
+            return $this->redirectToRoute('liste_modules_rattrapages');
+        }
+        $form = $this->createForm(ModuleRattrapageType::class,$modulerattrapage);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request); 
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($modulerattrapage);
+                $em->flush();
+                $this->addFlash('notice', 'Module de rattrapage modifié');
+            }
+            return $this->redirectToRoute('liste_modules_rattrapages');
+        }
+        return $this->render('module_rattrapage/modif_module_rattrapage.html.twig', [
+        'form'=>$form->createView()
+        ]);
+    }
 }
