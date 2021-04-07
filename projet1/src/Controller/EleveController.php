@@ -57,4 +57,32 @@ class EleveController extends AbstractController
         'eleves'=>$eleves 
         ]);
     }
+
+        /**
+     * @Route("/modif_eleve/{id}", name="modif_eleve", requirements={"id"="\d+"})
+     */
+    public function modifEleve(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoEleve = $em->getRepository(Eleve::class);
+        $eleve = $repoEleve->find($id);
+        if($eleve==null){
+            $this->addFlash('notice', "Cet élève n'existe pas");
+            return $this->redirectToRoute('liste_eleves');
+        }
+        $form = $this->createForm(EleveType::class,$eleve);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request); 
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($eleve);
+                $em->flush();
+                $this->addFlash('notice', 'Eleve modifié');
+            }
+            return $this->redirectToRoute('liste_eleves');
+        }
+        return $this->render('eleve/modif_eleve.html.twig', [
+        'form'=>$form->createView()
+        ]);
+    }
 }
