@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Liste Rattrapage{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-secondary p-4">Liste des rattrapages</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 p-4 m-0 text-primary">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Module</th>
+                            <th scope="col">Surveillant</th>
+                            <th scope="col">Intervenant</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Durée</th>
+                            <th scope="col">Etat</th>
+                            <th scope="col">PDF</th>
+
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rattrapage in rattrapages %}
+                            <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
+                                <td>{{rattrapage.id}}</td>
+                                <td>{{rattrapage.Module.libelle}}</td>
+                                <td>{{rattrapage.Surveillant.nom}}</td>
+                                <td>{{rattrapage.Intervenant.nom}}</td>
+                                <td>{{rattrapage.dateRattrapage | date("d/m/Y")}}</td>
+                                <td>{{rattrapage.dureeRattrapage | date('H:i:s')}}</td>
+                                {% if rattrapage.EtatRattrapage == 0 %}
+                                <td>Non Commencé</td>
+                                {% elseif rattrapage.EtatRattrapage == 1 %}
+                                <td>Non Corrigé</td>
+                                {%  elseif rattrapage.EtatRattrapage == 2 %}
+                                <td>Corrigé</td>
+                                {% else %}
+                                <td>Erreur</td>
+                                {% endif %}
+                                <td>{{rattrapage.PDF}}</td>
+
+                                <td><a href="" class="text-white"><span class="material-icons" title="Modifier une role">create</span></a></td>
+                                <td><a href="" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

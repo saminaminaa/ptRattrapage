@@ -74,6 +74,12 @@ class Rattrapage
      */
     private $moduleRattrapage;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classe::class, inversedBy="rattrapages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $classe;
+
     public function __construct()
     {
         $this->eleves = new ArrayCollection();
@@ -211,7 +217,7 @@ class Rattrapage
         return $this;
     }
 
-    public function getModuleRattrapage(): ?ModuleRattrapage
+    public function getModule(): ?ModuleRattrapage
     {
         return $this->moduleRattrapage;
     }
@@ -219,6 +225,18 @@ class Rattrapage
     public function setModuleRattrapage(?ModuleRattrapage $moduleRattrapage): self
     {
         $this->moduleRattrapage = $moduleRattrapage;
+
+        return $this;
+    }
+
+    public function getClasse(): ?Classe
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classe $classe): self
+    {
+        $this->classe = $classe;
 
         return $this;
     }
