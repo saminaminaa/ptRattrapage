@@ -36,7 +36,7 @@ class UtilisateurController extends AbstractController
             }
             return $this->redirectToRoute('accueil');
         } 
-        return $this->render('utilisateur/index.html.twig', [
+        return $this->render('utilisateur/ajout_utilisateur.html.twig', [
         'form'=>$form->createView()
         ]);
     }

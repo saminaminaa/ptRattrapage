@@ -28,7 +28,7 @@ class ClasseController extends AbstractController
             }
             return $this->redirectToRoute('classe');
         } 
-        return $this->render('classe/index.html.twig', [
+        return $this->render('classe/ajout_classe.html.twig', [
         'form'=>$form->createView()
         ]);
     }
