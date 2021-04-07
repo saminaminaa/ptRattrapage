@@ -46,4 +46,23 @@ class RattrapageController extends AbstractController
             'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
         ]);
     }
+
+    /**
+     * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
+     */
+    public function chronoRattrapage(int $id, Request $request): Response
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapage = $repoRattrapage->find($id);
+
+        if($rattrapage==null){
+            $this->addFlash('notice', "Ce Rattrapage n'existe pas");
+            return $this->redirectToRoute('liste_Rattrapages');
+        }
+
+        return $this->render('rattrapage/chrono_rattrapage.html.twig', [
+            'rattrapage'=>$rattrapage
+        ]);
+    }
 }
