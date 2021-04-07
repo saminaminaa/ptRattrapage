@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ModuleRattrapageController extends AbstractController
 {
     /**
-     * @Route("/module/rattrapage", name="module_rattrapage")
+     * @Route("/ajout_module_rattrapage", name="module_rattrapage")
      */
     public function index(Request $request): Response
     {
@@ -28,7 +28,7 @@ class ModuleRattrapageController extends AbstractController
             }
             return $this->redirectToRoute('module_rattrapage');
         } 
-        return $this->render('module_rattrapage/index.html.twig', [
+        return $this->render('module_rattrapage/ajout_module_rattrapage.html.twig', [
         'form'=>$form->createView()
         ]);
     }
