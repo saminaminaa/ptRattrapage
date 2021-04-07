@@ -28,7 +28,7 @@ class EleveController extends AbstractController
             }
             return $this->redirectToRoute('eleve');
         } 
-        return $this->render('eleve/ajout_eleve.html.twig', [
+        return $this->render('eleve/index.html.twig', [
         'form'=>$form->createView()
         ]);
     }

@@ -28,7 +28,7 @@ class ModuleRattrapageController extends AbstractController
             }
             return $this->redirectToRoute('module_rattrapage');
         } 
-        return $this->render('module_rattrapage/ajout_module_rattrapage.html.twig', [
+        return $this->render('module_rattrapage/index.html.twig', [
         'form'=>$form->createView()
         ]);
     }
