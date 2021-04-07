@@ -33,4 +33,17 @@ class RattrapageController extends AbstractController
         'form'=>$form->createView()
         ]);
     }
+
+    /**
+     * @Route("/liste_rattrapages", name="liste_rattrapages")
+     */
+    public function listeRattrapages(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
+        return $this->render('rattrapage/liste_rattrapages.html.twig', [
+            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
+        ]);
+    }
 }
