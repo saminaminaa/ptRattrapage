@@ -31,9 +31,15 @@ class Classe
      */
     private $eleves;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rattrapage::class, mappedBy="classe")
+     */
+    private $rattrapages;
+
     public function __construct()
     {
         $this->eleves = new ArrayCollection();
+        $this->rattrapages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +83,36 @@ class Classe
             // set the owning side to null (unless already changed)
             if ($elefe->getClasse() === $this) {
                 $elefe->setClasse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rattrapage[]
+     */
+    public function getRattrapages(): Collection
+    {
+        return $this->rattrapages;
+    }
+
+    public function addRattrapage(Rattrapage $rattrapage): self
+    {
+        if (!$this->rattrapages->contains($rattrapage)) {
+            $this->rattrapages[] = $rattrapage;
+            $rattrapage->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRattrapage(Rattrapage $rattrapage): self
+    {
+        if ($this->rattrapages->removeElement($rattrapage)) {
+            // set the owning side to null (unless already changed)
+            if ($rattrapage->getClasse() === $this) {
+                $rattrapage->setClasse(null);
             }
         }
 

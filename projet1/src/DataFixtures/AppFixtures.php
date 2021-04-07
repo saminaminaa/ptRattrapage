@@ -164,7 +164,7 @@ class AppFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('julien.legales@epsi.fr')
-        ->setPassword("julien.lenglet")
+        ->setPassword("julien.legales")
         ->setUtilisateur($utilisateur);
         $this->addReference('julienUser', $user);
         $this->manager->persist($user);
@@ -183,7 +183,8 @@ class AppFixtures extends Fixture
         ->setDureeRattrapage(date_create_from_format("h:i","2:00"))
         ->setCorrige("PDFCorrige")
         ->setSupportSonore(true)
-        ->setEtatRattrapage(0);
+        ->setEtatRattrapage(0)
+        ->setClasse($this->getReference('B1'));
 
         
     
