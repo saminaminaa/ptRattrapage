@@ -32,4 +32,29 @@ class ClasseController extends AbstractController
         'form'=>$form->createView()
         ]);
     }
+
+    /**
+    * @Route("/liste_classes", name="liste_classes")
+    */
+    public function listeClasses(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoClasse = $em->getRepository(Classe::class);
+
+        if ($request->get('supp')!=null){
+            $classe = $repoClasse->find($request->get('supp'));
+            if($classe!=null){
+                $em->getManager()->remove($classe);
+                $em->getManager()->flush();
+            }
+            return $this->redirectToRoute('liste_classes');
+        }
+           
+
+        $classes = $repoClasse->findBy(array(),array('libelle'=>'ASC'));
+        
+        return $this->render('classe/liste_classes.html.twig', [
+        'classes'=>$classes 
+        ]);
+    }
 }
