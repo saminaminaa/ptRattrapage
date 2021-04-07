@@ -58,9 +58,9 @@ class EleveController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/modif_eleve/{id}", name="modif_eleve", requirements={"id"="\d+"})
-     */
+    /**
+    * @Route("/modif_eleve/{id}", name="modif_eleve", requirements={"id"="\d+"})
+    */
     public function modifEleve(int $id, Request $request)
     {
         $em = $this->getDoctrine();
