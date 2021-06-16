@@ -47,6 +47,7 @@ class RattrapageController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
       /**
      * @Route("/liste_rattrapagesByIntervenant", name="liste_rattrapagesByIntervenant")
      */
@@ -74,4 +75,24 @@ class RattrapageController extends AbstractController
     }
 
     
+=======
+    /**
+     * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
+     */
+    public function chronoRattrapage(int $id, Request $request): Response
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapage = $repoRattrapage->find($id);
+
+        if($rattrapage==null){
+            $this->addFlash('notice', "Ce Rattrapage n'existe pas");
+            return $this->redirectToRoute('liste_Rattrapages');
+        }
+
+        return $this->render('rattrapage/chrono_rattrapage.html.twig', [
+            'rattrapage'=>$rattrapage
+        ]);
+    }
+>>>>>>> 16021311a27d5d5dba20615a3eb591ec9dc67d4e
 }

@@ -20,8 +20,9 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <img src="../templates/Logo_ISPE_Bastien.png" class="img-fluid" width="2%" height="2%" >
-
+  <!--<a class="navbar-brand" href="{{path('accueil')}}"> -->
+  <img src="../templates/Logo_ISPE_Bastien.png" class="img-fluid" width="2%" height="2%" >
+  <!--</a>-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,8 +34,46 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
+<<<<<<< HEAD
 
      
+=======
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('rattrapage')}}">Ajout rattrapage</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Classe</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('classe')}}">Ajout classe</a>
+          <a class="dropdown-item" href="{{path('liste_classes')}}">Liste classes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Eleve</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('eleve')}}">Ajout eleve</a>
+          <a class="dropdown-item" href="{{path('liste_eleves')}}">Liste eleves</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Module rattrapage</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('module_rattrapage')}}">Ajout module rattrapage</a>
+          <a class="dropdown-item" href="{{path('liste_modules_rattrapages')}}">Liste modules rattrapages</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('liste_rattrapages')}}">Liste rattrapages</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('inscrire')}}">Ajout utilisateur</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{path('liste_utilisateur')}}">Liste utilisateur</a>
+        </div>
+      </li>
+>>>>>>> 16021311a27d5d5dba20615a3eb591ec9dc67d4e
        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
             <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
@@ -138,7 +177,7 @@
   </div>
 
         {% block body %}{% endblock %}
-        {% block javascripts %}
+        {% block javascript %}
         <script src="../_vendor/jquery/dist/jquery.min.js"></script>
     <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../_assets/js/custom.js"></script>

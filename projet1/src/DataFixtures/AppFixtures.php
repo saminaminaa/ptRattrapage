@@ -152,6 +152,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('maxence.maziere@epsi.fr')
         ->setPassword("maxence.maziere")
+        ->setRoles('["ROLE_ADMIN"]')
         ->setUtilisateur($utilisateur);
         $this->addReference('maxenceUser', $user);
         $this->manager->persist($user);
@@ -165,17 +166,46 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('julien.legales@epsi.fr')
         ->setPassword("julien.legales")
+        ->setRoles('["ROLE_INTERVENANT"]')
         ->setUtilisateur($utilisateur);
         $this->addReference('julienUser', $user);
         $this->manager->persist($user);
         $this->manager->flush();
+
+        $utilisateur = new Utilisateur();
+        $utilisateur->setNom('A')
+        ->setPrenom('A');
+        $this->addReference('A', $utilisateur);
+        $this->manager->persist($utilisateur);
+
+        $user = new User();
+        $user->setEmail('A@A')
+        ->setPassword("A")
+        ->setRoles('["ROLE_SURVEILLANT"]')
+        ->setUtilisateur($utilisateur);
+        $this->addReference('AUser', $user);
+        $this->manager->persist($user);
+
+        $utilisateur = new Utilisateur();
+        $utilisateur->setNom('B')
+        ->setPrenom('B');
+        $this->addReference('B', $utilisateur);
+        $this->manager->persist($utilisateur);
+
+        $user = new User();
+        $user->setEmail('B@B')
+        ->setPassword("B")
+        ->setRoles('["ROLE_RESPONSABLE"]')
+        ->setUtilisateur($utilisateur);
+        $this->addReference('BUser', $user);
+        $this->manager->persist($user);
 
 
     }
 
     public function loadRattrapages(){
         $rattrapage = new Rattrapage();
-        $rattrapage->setSurveillant($this->getReference('maxence'))
+        $rattrapage->setSurveillant($this->getReference('A'))
         ->setIntervenant($this->getReference('Julien'))
         ->setModuleRattrapage($this->getReference('maths'))
         ->setPDF("PDF")
