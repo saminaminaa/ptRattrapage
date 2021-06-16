@@ -60,6 +60,9 @@ class RattrapageController extends AbstractController
             $this->addFlash('notice', "Ce Rattrapage n'existe pas");
             return $this->redirectToRoute('liste_Rattrapages');
         }
+        
+        $this->addFlash('notice', $rattrapage);
+
 
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
             'rattrapage'=>$rattrapage

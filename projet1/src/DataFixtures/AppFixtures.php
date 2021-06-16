@@ -152,7 +152,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('maxence.maziere@epsi.fr')
         ->setPassword("maxence.maziere")
-        ->setRoles('["ROLE_ADMIN"]')
+        ->setRoles(["ROLE_ADMIN"])
         ->setUtilisateur($utilisateur);
         $this->addReference('maxenceUser', $user);
         $this->manager->persist($user);
@@ -166,7 +166,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('julien.legales@epsi.fr')
         ->setPassword("julien.legales")
-        ->setRoles('["ROLE_INTERVENANT"]')
+        ->setRoles(["ROLE_INTERVENANT"])
         ->setUtilisateur($utilisateur);
         $this->addReference('julienUser', $user);
         $this->manager->persist($user);
@@ -181,7 +181,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('A@A')
         ->setPassword("A")
-        ->setRoles('["ROLE_SURVEILLANT"]')
+        ->setRoles(["ROLE_SURVEILLANT"])
         ->setUtilisateur($utilisateur);
         $this->addReference('AUser', $user);
         $this->manager->persist($user);
@@ -195,7 +195,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('B@B')
         ->setPassword("B")
-        ->setRoles('["ROLE_RESPONSABLE"]')
+        ->setRoles(["ROLE_RESPONSABLE"])
         ->setUtilisateur($utilisateur);
         $this->addReference('BUser', $user);
         $this->manager->persist($user);
