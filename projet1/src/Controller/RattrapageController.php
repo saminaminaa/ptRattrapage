@@ -46,4 +46,32 @@ class RattrapageController extends AbstractController
             'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
         ]);
     }
+
+      /**
+     * @Route("/liste_rattrapagesByIntervenant", name="liste_rattrapagesByIntervenant")
+     */
+    public function listeRattrapagesByIntervenant(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
+        return $this->render('rattrapage/liste_rattrapages.html.twig', [
+            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
+        ]);
+    }
+
+    /**
+     * @Route("/liste_rattrapagesBySurveillant", name="liste_rattrapagesBySurveillant")
+     */
+    public function listeRattrapagesBySurveillant(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
+        return $this->render('rattrapage/liste_rattrapages.html.twig', [
+            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
+        ]);
+    }
+
+    
 }
