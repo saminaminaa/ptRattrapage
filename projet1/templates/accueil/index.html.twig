@@ -11,6 +11,25 @@
     <h1>Bienvenue sur notre site de gestion des rattrapages</h1>
     <br><h2> Pour continuer, connectez-vous</h2>
 
+                {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+                      {% if app.user.utilisateur.nom is defined %}
+                      <h3>Bonjour {{app.user.utilisateur.nom}}  {{app.user.utilisateur.prenom}}</h3>
+                      {% endif %}
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                      <p>Vous êtes connecté en tant que {{ app.user.username }} (Admin)</p>
+                 
+                     {% elseif is_granted('ROLE_RESPONSABLE') %}
+                        <p>Vous êtes connecté en tant que {{ app.user.username }} (Responsable)</p> 
+
+                     {% elseif is_granted('ROLE_INTERVENANT') %}
+                        <p>Vous êtes connecté en tant que {{ app.user.username }} (Intervenant)</p> 
+
+                     {% elseif is_granted('ROLE_SURVEILLANT') %}
+                        <p>Vous êtes connecté en tant que {{ app.user.username }} (Surveillant)</p> 
+
+                {% endif %}
+                 
 
 
 </div>

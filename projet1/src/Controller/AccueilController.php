@@ -39,7 +39,7 @@ class AccueilController extends AbstractController
                 $id = $user->getId();
                 $repoUser = $this->getDoctrine()->getRepository(User::class);
                 $verif = $repoUser->findOneBy(array('email'=>$user->getEmail()));
-                $user->setRoles(array('ROLE_USER'));
+                // $user->setRoles(array('ROLE_RESPONSABLE'));
                 $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);

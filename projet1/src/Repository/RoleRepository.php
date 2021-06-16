@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Rattrapage;
+use App\Entity\Role;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Rattrapage|null find($id, $lockMode = null, $lockVersion = null)
- * @method Rattrapage|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rattrapage[]    findAll()
- * @method Rattrapage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Role|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Role|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Role[]    findAll()
+ * @method Role[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RattrapageRepository extends ServiceEntityRepository
+class RoleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Rattrapage::class);
+        parent::__construct($registry, Role::class);
     }
 
     // /**
-    //  * @return Rattrapage[] Returns an array of Rattrapage objects
+    //  * @return Role[] Returns an array of Role objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RattrapageRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Rattrapage
+    public function findOneBySomeField($value): ?Role
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

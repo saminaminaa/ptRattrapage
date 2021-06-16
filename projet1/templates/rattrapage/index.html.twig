@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent()}} - Ajout Rattrapage{% endblock %}
+
+ {% block javascripts %}  <script type="text/javascript"  src="../js/getEleveByClass.js"></script> 
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+ {% endblock %}
+
 {% block content %}
 
  <div class="container-fluid">
@@ -10,10 +15,16 @@
  <div class="row justify-content-center">
  <div class="col-12 bg-white p-4 m-0 text-primary">
  {{ form_start(form) }}
+
+
 {#  <div class="form-group">
  {{ form_label(form.PDF, "PDF (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.PDF, {'attr': {'class': 'form-control'}}) }}
  </div> #}
+ <div class="form-group">
+ {{ form_label(form.Classe, "Classe concernée ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Classe, {'attr': {'class': 'form-control'}}) }}
+ </div>
 <div class="form-group">
  {{ form_label(form.DateRattrapage, "Date du rattrapage (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.DateRattrapage, {'attr': {'class': 'form-control'}}) }}

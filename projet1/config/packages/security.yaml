@@ -36,3 +36,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+
+        # role du moins au plus fort
+    role_hierarchy: 
+       
+        ROLE_RESPONSABLE: ROLE_USER
+        ROLE_ADMIN:       [ROLE_RESPONSABLE, ROLE_USER]
+        
