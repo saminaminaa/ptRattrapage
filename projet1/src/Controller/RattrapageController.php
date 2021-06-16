@@ -47,7 +47,6 @@ class RattrapageController extends AbstractController
         ]);
     }
 
-<<<<<<< HEAD
       /**
      * @Route("/liste_rattrapagesByIntervenant", name="liste_rattrapagesByIntervenant")
      */
@@ -75,7 +74,6 @@ class RattrapageController extends AbstractController
     }
 
     
-=======
     /**
      * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
      */
@@ -94,5 +92,4 @@ class RattrapageController extends AbstractController
             'rattrapage'=>$rattrapage
         ]);
     }
->>>>>>> 16021311a27d5d5dba20615a3eb591ec9dc67d4e
 }
