@@ -23,6 +23,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     *public function getSurveillant(): array
+    *{
+   * $em = $this->getEntityManager();
+
+   * $query = $em->createQueryBuilder(
+
+  *      'SELECT u.roles
+  *      FROM App\Entity\User u
+ *       WHERE u.roles like :test'
+    
+*)->setParameter('test', '%SURVEILLANT%') ;
+
+*$query = $query->getQuery();
+*return $query
+ 
+*}
+     
+     */
+    
+
+    /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void

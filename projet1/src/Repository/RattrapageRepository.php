@@ -19,6 +19,32 @@ class RattrapageRepository extends ServiceEntityRepository
         parent::__construct($registry, Rattrapage::class);
     }
 
+    public function getRattrapageByIntervenant($idUser): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT r
+            FROM App\Entity\Rattrapage r, App\Entity\Utilisateur u
+            WHERE r.intervenant = :test
+            '
+        )->setParameter('test', $idUser);
+
+        return $query->getResult();
+    }
+
+    
+    public function getRattrapageBySurveillant($idUser): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT r
+            FROM App\Entity\Rattrapage r, App\Entity\Utilisateur u
+            WHERE r.surveillant = :test
+            '
+        )->setParameter('test', $idUser);
+
+        return $query->getResult();
+    }
     // /**
     //  * @return Rattrapage[] Returns an array of Rattrapage objects
     //  */
