@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EleveType extends AbstractType
 {
@@ -17,7 +18,12 @@ class EleveType extends AbstractType
         $builder
             ->add('Nom', TextType::class)
             ->add('Prenom', TextType::class)
-            ->add('Photo', TextType::class)
+            ->add('Photo', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('classe', EntityType::class,
             array( 'class' => 'App\Entity\Classe',
             'choice_label' => 'libelle'))
