@@ -33,7 +33,7 @@
                         {% for rattrapage in rattrapages %}
                             <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                                 <td>{{rattrapage.id}}</td>
-                                <td>{{rattrapage.Module.libelle}}</td>
+                                <td>{{rattrapage.ModuleRattrapage.libelle}}</td>
                                 <td>{{rattrapage.Surveillant.nom}}</td>
                                 <td>{{rattrapage.Intervenant.nom}}</td>
                                 <td>{{rattrapage.dateRattrapage | date("d/m/Y H:i:s")}}</td>

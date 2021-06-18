@@ -1,5 +1,7 @@
 let idRattrapage = document.getElementById("idRattrapage");
 
+idRattrapage = idRattrapage.value
+
 function ajaxEleveByRattrapage(idRattrapage){
     var request= $.ajax({
         url: "http://serveur1.arras-sio.com/symfony4-4061/ptRattrapage/projet1/public/api/rattrapages/"+ idRattrapage, 
@@ -41,3 +43,5 @@ function ajaxEleveByLink(e){
         alert ('erreur sur Tests');
     });
 }
+
+ajaxEleveByRattrapage();
