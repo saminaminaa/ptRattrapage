@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\RattrapageType;
 use App\Entity\Rattrapage;
 use App\Entity\Utilisateur;
+use App\Entity\EleveRattrapage;
 use Symfony\Component\HttpFoundation\Request;
 
 class RattrapageController extends AbstractController
@@ -100,4 +101,30 @@ class RattrapageController extends AbstractController
             'rattrapage'=>$rattrapage
         ]);
     }
+
+
+      /**
+     * @Route("/rattrapage_profile/{id}", name="rattrapage_profile", requirements={"id"="\d+"})
+     */
+    public function rattrapageprofile(int $id, Request $request)
+    {
+     
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $repoEleve = $em->getRepository(EleveRattrapage::class);
+        $rattrapage = $repoRattrapage->find($id);
+        $eleves = $repoEleve->getEleveByRattrapage($id);
+
+        if ($rattrapage==null){
+            $this->addFlash('notice','rattrapage introuvable');
+            return $this->redirectToRoute('accueil');
+        }
+        
+        return $this->render('rattrapage/profil.html.twig', [
+            'rattrapage' => $rattrapage,
+            'eleves' => $eleves
+           
+        ]);
+    }    
+
 }
