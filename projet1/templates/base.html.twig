@@ -114,81 +114,109 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-
-
-       {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+      {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
+            <a class="nav-brand" href="{{path('app_login')}}">Se connecter</a>
           </li>
+
+          <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('inscrire')}}">Ajout utilisateur</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{path('liste_utilisateur')}}">Liste utilisateur</a>
+        </div>
+      </li>
       {% else %} 
       {% if is_granted('ROLE_ADMIN') %}
 
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('rattrapage')}}">Ajout rattrapage</a>
-        </li>    
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('classe')}}">Ajout classe</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('eleve')}}">Ajout eleve</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('module_rattrapage')}}">Ajout module rattrapage</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('liste_rattrapages')}}">Liste rattrapages</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{path('inscrire')}}">Ajout utilisateur</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{path('liste_utilisateur')}}">Liste utilisateur</a>
-          </div>
-        </li>  
-    
-      {% elseif is_granted('ROLE_RESPONSABLE') %}
       
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('rattrapage')}}">Ajout rattrapage</a>
-        </li>    
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('classe')}}">Ajout classe</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('eleve')}}">Ajout eleve</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('module_rattrapage')}}">Ajout module rattrapage</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('liste_rattrapages')}}">Liste rattrapages</a>
-        </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="{{path('rattrapage')}}">Ajout rattrapage</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Classe</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('classe')}}">Ajout classe</a>
+          <a class="dropdown-item" href="{{path('liste_classes')}}">Liste classes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Eleve</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('eleve')}}">Ajout eleve</a>
+          <a class="dropdown-item" href="{{path('liste_eleves')}}">Liste elevesssss</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Module rattrapage</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('module_rattrapage')}}">Ajout module rattrapage</a>
+          <a class="dropdown-item" href="{{path('liste_modules_rattrapages')}}">Liste modules rattrapages</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="{{path('liste_rattrapages')}}">Liste rattrapages</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('inscrire')}}">Ajout utilisateur</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{path('liste_utilisateur')}}">Liste utilisateur</a>
+        </div>
+      </li>
+
+      {% elseif is_granted('ROLE_RESPONSABLE') %}
+
+        
+      <li class="nav-item">
+        <a class="navbar-brand" href="{{path('rattrapage')}}">Ajout rattrapage</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Classe</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('classe')}}">Ajout classe</a>
+          <a class="dropdown-item" href="{{path('liste_classes')}}">Liste classes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Eleve</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('eleve')}}">Ajout eleve</a>
+          <a class="dropdown-item" href="{{path('liste_eleves')}}">Liste elevesssss</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Module rattrapage</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path('module_rattrapage')}}">Ajout module rattrapage</a>
+          <a class="dropdown-item" href="{{path('liste_modules_rattrapages')}}">Liste modules rattrapages</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="{{path('liste_rattrapages')}}">Liste rattrapages</a>
+      </li>
 
       {% elseif is_granted('ROLE_INTERVENANT') %}
         <li class="nav-item">
-          <a class="nav-link" href="{{path('liste_rattrapagesByIntervenant')}}">Liste rattrapages</a>
+          <a class="nav-brand" href="{{path('liste_rattrapagesByIntervenant')}}">Liste rattrapages</a>
         </li>            
 
       {% elseif is_granted('ROLE_SURVEILLANT') %}
           <li class="nav-item">
-          <a class="nav-link" href="{{path('liste_rattrapagesBySurveillant')}}">Liste rattrapages</a>
+          <a class="nav-brand" href="{{path('liste_rattrapagesBySurveillant')}}">Liste rattrapages</a>
         </li>            
               
 
       {% endif %}
         
         <li class="nav-item">
-          <a class="nav-link" href="{{path('app_logout')}}">Se déconnecter</a>
+          <a class="nav-brand" href="{{path('app_logout')}}">Se déconnecter</a>
         </li>
-      {% endif %}    
+      {% endif %}  
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
-    </form>
   </div>
 </nav>
 
@@ -216,7 +244,6 @@
   </div>
 
         {% block body %}{% endblock %}
-
         <script src="../_vendor/jquery/dist/jquery.min.js"></script>
     <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../_assets/js/custom.js"></script>
