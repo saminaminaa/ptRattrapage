@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Eleve;
 use App\Form\EleveType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 
 class EleveController extends AbstractController
 {
@@ -36,9 +38,9 @@ class EleveController extends AbstractController
                     );
         
                     // On crée l'image dans la base de données
-                    $img = new Images();
-                    $img->setName($fichier);
-                    $eleve->addImage($img);
+                    $img = new Eleve();
+                    $img->setPhoto($fichier);
+                    $eleve->getPhoto($img);
                     //https://nouvelle-techno.fr/actualites/live-coding-upload-dimages-multiples-avec-symfony-4-et-5
                 }
                 $em = $this->getDoctrine()->getManager();

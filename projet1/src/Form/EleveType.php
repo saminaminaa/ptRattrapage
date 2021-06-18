@@ -19,10 +19,10 @@ class EleveType extends AbstractType
             ->add('Nom', TextType::class)
             ->add('Prenom', TextType::class)
             ->add('Photo', FileType::class,[
-                'label' => false,
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false
+                /*'label' => false,*/
+                /*'multiple' => true,*/
+                /*'mapped' => false*/
+                /*'required' => false*/
             ])
             ->add('classe', EntityType::class,
             array( 'class' => 'App\Entity\Classe',

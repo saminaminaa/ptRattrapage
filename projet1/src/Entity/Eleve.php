@@ -33,6 +33,7 @@ class Eleve
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Photo;
 
@@ -46,6 +47,11 @@ class Eleve
      * @ORM\OneToMany(targetEntity=EleveRattrapage::class, mappedBy="eleve")
      */
     private $eleveRattrapages;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $Name;
 
     public function __construct()
     {
@@ -132,6 +138,18 @@ class Eleve
                 $eleveRattrapage->setEleve(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(?string $Name): self
+    {
+        $this->Name = $Name;
 
         return $this;
     }
