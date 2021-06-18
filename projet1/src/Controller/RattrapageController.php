@@ -90,14 +90,23 @@ class RattrapageController extends AbstractController
 
         if($rattrapage==null){
             $this->addFlash('notice', "Ce Rattrapage n'existe pas");
-            return $this->redirectToRoute('liste_Rattrapages');
+            return $this->redirectToRoute('liste_rattrapages');
         }
         
-        $this->addFlash('notice', $rattrapage);
-
+        $date = $repoRattrapage->getdate($id);
+        foreach($date as $dateR){
+            $dateNow = date_create(date('Y-m-d H:i:s'));
+            $dateRattrapage = date_create(date_format($dateR['dateR'], 'Y-m-d H:i:s'));
+            $interval = date_diff($dateNow, $dateRattrapage);
+            if(strtotime($interval->format('%Y-%m-%d %H:%i:%s')) > strtotime('0000-00-00 00:15:00')){
+                $this->addFlash('notice', "Le rattrapage ne peut pas être lancé maintenant");
+                return $this->redirectToRoute('liste_rattrapages');
+            }
+        }
 
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
-            'rattrapage'=>$rattrapage
+            'rattrapage'=>$rattrapage,
+            'date'=>$date
         ]);
     }
 }
