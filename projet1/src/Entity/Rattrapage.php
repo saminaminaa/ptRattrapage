@@ -217,7 +217,7 @@ class Rattrapage
         return $this;
     }
 
-    public function getModule(): ?ModuleRattrapage
+    public function getModuleRattrapage(): ?ModuleRattrapage
     {
         return $this->moduleRattrapage;
     }
