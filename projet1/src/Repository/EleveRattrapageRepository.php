@@ -19,6 +19,19 @@ class EleveRattrapageRepository extends ServiceEntityRepository
         parent::__construct($registry, EleveRattrapage::class);
     }
 
+    public function getEleveByRattrapage($idRattrapage): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e
+            FROM App\Entity\EleveRattrapage e, App\Entity\Rattrapage r
+            WHERE e.rattrapage = :test
+            '
+        )->setParameter('test', $idRattrapage);
+
+        return $query->getResult();
+    }
+
     // /**
     //  * @return EleveRattrapage[] Returns an array of EleveRattrapage objects
     //  */
