@@ -47,4 +47,22 @@ class RattrapageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getDate(int $id): array
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+
+            'SELECT r.DateRattrapage as dateR
+            FROM App\Entity\Rattrapage r 
+            WHERE r.id = 5
+          '
+        );
+
+
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
 }

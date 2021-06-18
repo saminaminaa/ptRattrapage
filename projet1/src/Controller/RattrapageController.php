@@ -47,33 +47,6 @@ class RattrapageController extends AbstractController
         ]);
     }
 
-      /**
-     * @Route("/liste_rattrapagesByIntervenant", name="liste_rattrapagesByIntervenant")
-     */
-    public function listeRattrapagesByIntervenant(Request $request)
-    {
-        $em = $this->getDoctrine();
-        $repoRattrapage = $em->getRepository(Rattrapage::class);
-        $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
-        return $this->render('rattrapage/liste_rattrapages.html.twig', [
-            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
-        ]);
-    }
-
-    /**
-     * @Route("/liste_rattrapagesBySurveillant", name="liste_rattrapagesBySurveillant")
-     */
-    public function listeRattrapagesBySurveillant(Request $request)
-    {
-        $em = $this->getDoctrine();
-        $repoRattrapage = $em->getRepository(Rattrapage::class);
-        $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
-        return $this->render('rattrapage/liste_rattrapages.html.twig', [
-            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
-        ]);
-    }
-
-    
     /**
      * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
      */
@@ -85,14 +58,23 @@ class RattrapageController extends AbstractController
 
         if($rattrapage==null){
             $this->addFlash('notice', "Ce Rattrapage n'existe pas");
-            return $this->redirectToRoute('liste_Rattrapages');
+            return $this->redirectToRoute('liste_rattrapages');
         }
         
-        $this->addFlash('notice', $rattrapage);
-
+        $date = $repoRattrapage->getdate($id);
+        foreach($date as $dateR){
+            $dateNow = date_create(date('Y-m-d H:i:s'));
+            $dateRattrapage = date_create(date_format($dateR['dateR'], 'Y-m-d H:i:s'));
+            $interval = date_diff($dateNow, $dateRattrapage);
+            if(strtotime($interval->format('%Y-%m-%d %H:%i:%s')) > strtotime('0000-00-00 00:15:00')){
+                $this->addFlash('notice', "Le rattrapage ne peut pas être lancé maintenant");
+                return $this->redirectToRoute('liste_rattrapages');
+            }
+        }
 
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
-            'rattrapage'=>$rattrapage
+            'rattrapage'=>$rattrapage,
+            'date'=>$date
         ]);
     }
 }
