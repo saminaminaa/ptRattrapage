@@ -19,8 +19,11 @@ class RattrapageController extends AbstractController
     {
         $rattrapage = new Rattrapage();
         $form = $this->createForm(RattrapageType::class,$rattrapage);
+       
         if ($request->isMethod('POST')) { 
             $form->handleRequest($request); 
+            $rattrapage->setEtatRattrapage(1);
+          //  $rattrapage->setmoduleRattrapage(18);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($rattrapage);
@@ -47,6 +50,35 @@ class RattrapageController extends AbstractController
         ]);
     }
 
+      /**
+     * @Route("/liste_rattrapagesByIntervenant", name="liste_rattrapagesByIntervenant")
+     */
+    public function listeRattrapagesByIntervenant(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $idUser =  $this->getUser()->getUtilisateur()->getId();
+        $rattrapages = $repoRattrapage->getRattrapageByIntervenant($idUser);
+        return $this->render('rattrapage/liste_rattrapages.html.twig', [
+            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
+        ]);
+    }
+
+    /**
+     * @Route("/liste_rattrapagesBySurveillant", name="liste_rattrapagesBySurveillant")
+     */
+    public function listeRattrapagesBySurveillant(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $idUser =  $this->getUser()->getUtilisateur()->getId();
+        $rattrapages = $repoRattrapage->getRattrapageBySurveillant($idUser);
+        return $this->render('rattrapage/liste_rattrapages.html.twig', [
+            'rattrapages'=>$rattrapages 
+        ]);
+    }
+
+    
     /**
      * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
      */

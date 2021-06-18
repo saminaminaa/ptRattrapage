@@ -20,8 +20,9 @@ class RattrapageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('Classe',EntityType::class,array("class"=>"App\Entity\Classe","choice_label"=>"libelle"))
-            ->add('Module',EntityType::class,array("class"=>"App\Entity\ModuleRattrapage","choice_label"=>"libelle"))
+            ->add('moduleRattrapage',EntityType::class,array("class"=>"App\Entity\ModuleRattrapage","choice_label"=>"libelle"))
             //->add('PDF', TextType::class)
             ->add('Surveillant',EntityType::class,array("class"=>"App\Entity\Utilisateur","choice_label"=>"nom"))
             ->add('Intervenant',EntityType::class,array("class"=>"App\Entity\Utilisateur","choice_label"=>"nom"))
