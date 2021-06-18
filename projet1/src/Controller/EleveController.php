@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Eleve;
 use App\Form\EleveType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 
 class EleveController extends AbstractController
 {
@@ -21,10 +23,31 @@ class EleveController extends AbstractController
         if ($request->isMethod('POST')) { 
             $form->handleRequest($request); 
             if ($form->isSubmitted() && $form->isValid()) {
+                //photos eleves :
+                $photos = $form->get('Photo')->getData(); //recup image transmise
+
+                // On boucle sur les images
+                foreach($photos as $photo){
+                    // On génère un nouveau nom de fichier
+                    $fichier = md5(uniqid()).'.'.$photo->guessExtension();
+                    
+                    // On copie le fichier dans le dossier uploads
+                    $photo->move(
+                        $this->getParameter('images_directory'),
+                        $fichier
+                    );
+        
+                    // On crée l'image dans la base de données
+                    $img = new Eleve();
+                    $img->setPhoto($fichier);
+                    $eleve->getPhoto($img);
+                    //https://nouvelle-techno.fr/actualites/live-coding-upload-dimages-multiples-avec-symfony-4-et-5
+                }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($eleve);
                 $em->flush();
                 $this->addFlash('notice', 'Eleve inséré');
+
             }
             return $this->redirectToRoute('eleve');
         } 
