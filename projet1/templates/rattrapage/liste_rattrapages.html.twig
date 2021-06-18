@@ -18,7 +18,7 @@
                             <th scope="col">Module</th>
                             <th scope="col">Surveillant</th>
                             <th scope="col">Intervenant</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Date et Heure</th>
                             <th scope="col">Durée</th>
                             <th scope="col">Etat</th>
                             <th scope="col">PDF</th>
@@ -36,7 +36,7 @@
                                 <td>{{rattrapage.Module.libelle}}</td>
                                 <td>{{rattrapage.Surveillant.nom}}</td>
                                 <td>{{rattrapage.Intervenant.nom}}</td>
-                                <td>{{rattrapage.dateRattrapage | date("d/m/Y")}}</td>
+                                <td>{{rattrapage.dateRattrapage | date("d/m/Y H:i:s")}}</td>
                                 <td>{{rattrapage.dureeRattrapage | date('H:i:s')}}</td>
                                 {% if rattrapage.EtatRattrapage == 0 %}
                                 <td>Non Commencé</td>
@@ -50,7 +50,7 @@
                                 <td>{{rattrapage.PDF}}</td>
                                 <td>{{rattrapage.Classe.libelle}}</td>
 
-                                <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
+                                <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id, 'support': rattrapage.SupportSonore} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
                                 <td><a href="" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
                             </tr>
                         {% endfor %}
