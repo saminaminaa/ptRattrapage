@@ -81,9 +81,9 @@ class RattrapageController extends AbstractController
 
     
     /**
-     * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
+     * @Route("/chrono_rattrapage/{id}/{support}", name="chrono_rattrapage", requirements={"id"="\d+","support"="\d+"})
      */
-    public function chronoRattrapage(int $id, Request $request): Response
+    public function chronoRattrapage(int $id,int $support, Request $request): Response
     {
         $em = $this->getDoctrine();
         $repoRattrapage = $em->getRepository(Rattrapage::class);
@@ -107,7 +107,8 @@ class RattrapageController extends AbstractController
 
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
             'rattrapage'=>$rattrapage,
-            'date'=>$date
+            'date'=>$date,
+            'support'=>$support
         ]);
     }
 
