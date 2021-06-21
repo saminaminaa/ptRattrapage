@@ -42,9 +42,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for eleve in eleves %}
                         <tr class="table-secondary">
 
-                      {% for eleve in eleves %}
+                      
                          <td id="idEleve">{{eleve.id}} </td>
                         <td>{{eleve.eleve.nom}} </td>
                         <td>{{eleve.eleve.prenom}} </td>
@@ -56,10 +57,10 @@
 
                         </form>
 
-                     {% endfor %}
+                     
                                           
                      </tr>
-            
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
