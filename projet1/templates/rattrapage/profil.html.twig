@@ -33,6 +33,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr class="table-primary">
+                            <th scope="col">Id</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
                             <th scope="col">Note</th>
@@ -44,11 +45,16 @@
                         <tr class="table-secondary">
 
                       {% for eleve in eleves %}
+                         <td id="idEleve">{{eleve.id}} </td>
                         <td>{{eleve.eleve.nom}} </td>
                         <td>{{eleve.eleve.prenom}} </td>
+                        <form method="post" action="{{path('rattrapage_profile', {'id': rattrapage.id})}}">
+                        <input id="idEleve" name="idEleve" value={{eleve.eleve.id}} hidden>
                         <td><input type="number" id="note" name="note" value={{eleve.note}}></td>
+                        <td>    <button type="submit" class="btn btn-primary" name="btInscrire" id="btInscrire" href="index"><span class="material-icons" title="Lancer un chrono">save</span></button></td>
+                    
 
-                        <td><a href="" class="text-primary"><span class="material-icons" title="Noter" id="noter"> save </span></a></td>
+                        </form>
 
                      {% endfor %}
                                           

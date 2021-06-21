@@ -124,7 +124,14 @@ class RattrapageController extends AbstractController
         $repoEleve = $em->getRepository(EleveRattrapage::class);
         $rattrapage = $repoRattrapage->find($id);
         $eleves = $repoEleve->getEleveByRattrapage($id);
+      
 
+        if (isset($_POST['note'])){
+            $note = $_POST['note'];
+            $idEleve = $_POST['idEleve'];
+            $eleves = $repoEleve->updateNote($idEleve, $note);
+        }
+        
         if ($rattrapage==null){
             $this->addFlash('notice','rattrapage introuvable');
             return $this->redirectToRoute('accueil');
@@ -136,5 +143,5 @@ class RattrapageController extends AbstractController
            
         ]);
     }    
-
+    
 }
