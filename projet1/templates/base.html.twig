@@ -116,7 +116,7 @@
       </li>
       {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">
-            <a class="nav-brand" href="{{path('app_login')}}">Se connecter</a>
+            <a class="navbar-brand" href="{{path('app_login')}}">Se connecter</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -200,19 +200,19 @@
 
       {% elseif is_granted('ROLE_INTERVENANT') %}
         <li class="nav-item">
-          <a class="nav-brand" href="{{path('liste_rattrapagesByIntervenant')}}">Liste rattrapages</a>
+          <a class="navbar-brand" href="{{path('liste_rattrapagesByIntervenant')}}">Liste rattrapages</a>
         </li>            
 
       {% elseif is_granted('ROLE_SURVEILLANT') %}
           <li class="nav-item">
-          <a class="nav-brand" href="{{path('liste_rattrapagesBySurveillant')}}">Liste rattrapages</a>
+          <a class="navbar-brand" href="{{path('liste_rattrapagesBySurveillant')}}">Liste rattrapages</a>
         </li>            
               
 
       {% endif %}
         
         <li class="nav-item">
-          <a class="nav-brand" href="{{path('app_logout')}}">Se déconnecter</a>
+          <a class="navbar-brand" href="{{path('app_logout')}}">Se déconnecter</a>
         </li>
       {% endif %}  
 
