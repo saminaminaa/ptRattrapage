@@ -20,7 +20,7 @@ let selectClass = document.getElementById("rattrapage_Classe");
         });
         // Fonction qui se lance lorsque l’accès au web service provoque une erreur
         request.fail(function( jqXHR, textStatus ) {
-            alert ('erreur sur Tests');
+            alert ('erreur sur Test');
         });
     }
 
