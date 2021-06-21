@@ -32,6 +32,20 @@ class EleveRattrapageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+
+    public function updateNote($idEleve, $note){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'UPDATE App\Entity\EleveRattrapage e 
+            SET e.Note = :note 
+            WHERE e.eleve = :id '
+        )->setParameter('note', $note)
+        ->setParameter('id', $idEleve);
+
+        return $query->execute();
+    }
+
+
     // /**
     //  * @return EleveRattrapage[] Returns an array of EleveRattrapage objects
     //  */
