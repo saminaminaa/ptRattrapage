@@ -87,7 +87,9 @@ class RattrapageController extends AbstractController
     {
         $em = $this->getDoctrine();
         $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $repoEleve = $em->getRepository(EleveRattrapage::class);
         $rattrapage = $repoRattrapage->find($id);
+        $eleves = $repoEleve->getEleveByRattrapage($id);
 
         if($rattrapage==null){
             $this->addFlash('notice', "Ce Rattrapage n'existe pas");
@@ -108,7 +110,8 @@ class RattrapageController extends AbstractController
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
             'rattrapage'=>$rattrapage,
             'date'=>$date,
-            'support'=>$support
+            'support'=>$support,
+            'eleves'=>$eleves
         ]);
     }
 

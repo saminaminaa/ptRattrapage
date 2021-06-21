@@ -1,13 +1,17 @@
 /* On récupère la valeur de la div chrono (20) */
 var temps = document.getElementById("chrono");
 var hms = temps.innerHTML;
-var btChrono = document.getElementById("btChrono")
+var btChrono = document.getElementById("btChrono");
 var splitTime = hms.split(':'); // split it at the colons
 var secondes = (+splitTime[0]) * 60 * 60 + (+splitTime[1]) * 60 + (+splitTime[2]); 
-var support = document.getElementById("support")
-var buttonPressed = false
+var support = document.getElementById("support");
+var presence = document.getElementsByClassName("elevePresent");
+var buttonPressed = false;
+var epreuveTerminee = false;
 
 btChrono.addEventListener("click",lockButton)
+
+console.log(presence)
 
 function lockButton(){
     if(!buttonPressed){
@@ -36,18 +40,27 @@ function decrementerChrono() {
         if((secondes == 3600 ||secondes == 1800 || secondes == 900 || secondes == 300)&& support.value == "1"){
             PlaySound();
         }
-       temps.innerHTML = secondsToHms(secondes);
+        if(epreuveTerminee){
+            temps.innerHTML= "L'épreuve est terminée. " + secondsToHms(secondes) + " restantes pour finir l'appel"+ "<br />";
+        }else{
+            temps.innerHTML = secondsToHms(secondes);
+        }
         //alert(document.getElementById("chrono").innerHTML = secondes);
         var ok = window.setTimeout("decrementerChrono()", 1000);
         //alert("ok = " + ok);
     } else {
+        PlaySound();
         temps.innerHTML = "L'épreuve est terminée. " + "<br />";
+        secondes = 300;
+        epreuveTerminee = true;
+        var ok = window.setTimeout("decrementerChrono()", 1000);
     }
 }
 
 function PlaySound() {
     document.getElementById('alert').play();
 }
+
 
 
 

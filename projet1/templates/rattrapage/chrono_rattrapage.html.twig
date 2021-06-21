@@ -1,7 +1,52 @@
 {% extends 'base.html.twig' %}
 {% block javascript %} <script src="../../../js/chrono.js"></script> {% endblock %}
 {% block content %}
+<div class="row justify-content-center">
+        <div class="col-8 p-4 m-0 text-primary">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th scope="col">{{rattrapage.id}}</th>
+                            <th scope="col">{{rattrapage.ModuleRattrapage.libelle}}</th>
+                            <th scope="col">{{rattrapage.Surveillant.nom}}</th>
+                            <th scope="col">{{rattrapage.Intervenant.nom}}</th>
+                            <th scope="col">{{rattrapage.dateRattrapage | date("d/m/Y")}}</th>
+                            <th scope="col">{{rattrapage.dureeRattrapage | date('H:i:s')}}</th>
+                            <th scope="col">Etat</th>
+                            <th scope="col">{{rattrapage.PDF}}</th>
+                            <th scope="col">{{rattrapage.Classe.libelle}}</th>
 
+                        </tr>
+                    </thead>
+                </table>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Présent</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-secondary">
+
+                      {% for eleve in eleves %}
+                        <td>{{eleve.eleve.nom}} </td>
+                        <td>{{eleve.eleve.prenom}} </td>
+                        <td> <input type="checkbox" class="elevePresent" value={{eleve.eleve.id}}> </td>
+                        <input type="datetime" hidden>
+                     {% endfor %}
+                                          
+                     </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 <div id="chrono" name="chrono"> {{rattrapage.dureeRattrapage | date('H:i:s')}} </div>
 <button id="btChrono" name="btChrono"> demarrer
 <audio src="../../../sounds/alert.wav" id="alert"></audio>

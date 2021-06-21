@@ -48,11 +48,6 @@ class Eleve
      */
     private $eleveRattrapages;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $Name;
-
     public function __construct()
     {
         $this->rattrapages = new ArrayCollection();
@@ -138,18 +133,6 @@ class Eleve
                 $eleveRattrapage->setEleve(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->Name;
-    }
-
-    public function setName(?string $Name): self
-    {
-        $this->Name = $Name;
 
         return $this;
     }
