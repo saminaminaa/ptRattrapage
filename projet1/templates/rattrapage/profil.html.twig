@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Liste Rattrapage{% endblock %}
+       
+{% block javascript %} <script src="../../js/notes.js"></script> {% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-secondary p-4">Liste des eleves </h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 p-4 m-0 text-primary">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th scope="col">{{rattrapage.id}}</th>
+                            <th scope="col">{{rattrapage.ModuleRattrapage.libelle}}</th>
+                            <th scope="col">{{rattrapage.Surveillant.nom}}</th>
+                            <th scope="col">{{rattrapage.Intervenant.nom}}</th>
+                            <th scope="col">{{rattrapage.dateRattrapage | date("d/m/Y")}}</th>
+                            <th scope="col">{{rattrapage.dureeRattrapage | date('H:i:s')}}</th>
+                            <th scope="col">Etat</th>
+                            <th scope="col">{{rattrapage.PDF}}</th>
+                            <th scope="col">{{rattrapage.Classe.libelle}}</th>
+
+                        </tr>
+                    </thead>
+                </table>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Note</th>
+                            <th></th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-secondary">
+
+                      {% for eleve in eleves %}
+                         <td id="idEleve">{{eleve.id}} </td>
+                        <td>{{eleve.eleve.nom}} </td>
+                        <td>{{eleve.eleve.prenom}} </td>
+                        <form method="post" action="{{path('rattrapage_profile', {'id': rattrapage.id})}}">
+                        <input id="idEleve" name="idEleve" value={{eleve.eleve.id}} hidden>
+                        <td><input type="number" id="note" name="note" value={{eleve.note}}></td>
+                        <td>    <button type="submit" class="btn btn-primary" name="btInscrire" id="btInscrire" href="index"><span class="material-icons" title="Lancer un chrono">save</span></button></td>
+                    
+
+                        </form>
+
+                     {% endfor %}
+                                          
+                     </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

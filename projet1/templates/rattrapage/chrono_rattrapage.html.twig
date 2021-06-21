@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block javascript %} <script src="../../../js/chrono.js"></script> 
-<script src="../../../js/getEleveByRattrapage.js"></script> 
-{% endblock %}
+{% block javascript %} <script src="../../../js/chrono.js"></script> {% endblock %}
 {% block content %}
 
 <div id="chrono" name="chrono"> {{rattrapage.dureeRattrapage | date('H:i:s')}} </div>
@@ -9,4 +7,5 @@
 <audio src="../../../sounds/alert.wav" id="alert"></audio>
 <input id="support" value={{support}} hidden>
 <input id="idRattrapage" value={{rattrapage.id}} hidden>
+
 {% endblock %}
