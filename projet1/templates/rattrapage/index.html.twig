@@ -17,10 +17,7 @@
  {{ form_start(form) }}
 
 
-{#  <div class="form-group">
- {{ form_label(form.PDF, "PDF (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
- {{ form_widget(form.PDF, {'attr': {'class': 'form-control'}}) }}
- </div> #}
+  
  <div class="form-group">
  {{ form_label(form.Classe, "Classe concernée ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.Classe, {'attr': {'class': 'form-control'}}) }}
@@ -33,26 +30,32 @@
  {{ form_label(form.DureeRattrapage, "Durée du rattrapage (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.DureeRattrapage, {'attr': {'class': 'form-control'}}) }}
  </div>
+ <div class="form-group">
+ {{ form_label(form.moduleRattrapage, "Module (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.moduleRattrapage, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group">
+ {{ form_label(form.PDF, "PDF (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.PDF, {'attr': {'class': 'form-control'}}) }}
+ </div> 
   <div class="form-group">
  {{ form_label(form.Corrige, "Corrigé (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.Corrige, {'attr': {'class': 'form-control'}}) }}
  </div>
+   
+
    <div class="form-group">
+ {{ form_label(form.Surveillant, "Surveillant (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Surveillant, {'attr': {'class': 'form-control'}}) }}
+ </div>
+   <div class="form-group">
+ {{ form_label(form.Intervenant, "Intervenant (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Intervenant, {'attr': {'class': 'form-control'}}) }}
+ </div> 
+ <div class="form-group">
  {{ form_label(form.SupportSonore, "Souhaitez vous ajouter un support sonore ? (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
  {{ form_widget(form.SupportSonore, {'attr': {'class': 'form-control'}}) }}
  </div>
-{# <div class="form-group">
- {{ form_label(form.EtatRattrapage, "Etat du rattrapage (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
- {{ form_widget(form.EtatRattrapage, {'attr': {'class': 'form-control'}}) }}
- </div> #}
-{#   <div class="form-group">
- {{ form_label(form.surveillant, "Surveillant (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
- {{ form_widget(form.surveillant, {'attr': {'class': 'form-control'}}) }}
- </div>
-   <div class="form-group">
- {{ form_label(form.intervenant, "Intervenant (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
- {{ form_widget(form.intervenant, {'attr': {'class': 'form-control'}}) }}
- </div> #}
  <div class="form-group mx-auto text-center">
  {{ form_widget(form.ajouter, { 'label': "Ajouter", 'attr': {'class': 'btn text-white mx-auto text-center'}}) }}
  </div>

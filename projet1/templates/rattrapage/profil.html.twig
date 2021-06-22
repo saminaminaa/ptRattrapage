@@ -49,7 +49,7 @@
                          <td id="idEleve">{{eleve.id}} </td>
                         <td>{{eleve.eleve.nom}} </td>
                         <td>{{eleve.eleve.prenom}} </td>
-                        <form method="post" action="{{path('rattrapage_profile', {'id': rattrapage.id})}}">
+                        <form method="post" action="{{path('rattrapage_profile', {'id': rattrapage.id })}}">
                         <input id="idEleve" name="idEleve" value={{eleve.eleve.id}} hidden>
                         <td><input type="number" id="note" name="note" value={{eleve.note}}></td>
                         <td>    <button type="submit" class="btn btn-primary" name="btInscrire" id="btInscrire" href="index"><span class="material-icons" title="Ajouter une note">save</span></button></td>
@@ -63,6 +63,20 @@
                     {% endfor %}
                     </tbody>
                 </table>
+
+                  <div class="row justify-content-center">
+                  <form method="post" action="{{ asset('../../projet1/public/sujet/' ~ rattrapage.PDF) }}">
+                    <button type="submit" class="btn btn-primary" name="btDownload" id="btDownload" href="">
+                        Telecharger le sujet
+                    </button>
+                 </form>
+                  <form method="post" action="{{ asset('../../projet1/public/corrige/' ~ rattrapage.Corrige) }}">
+                    <button type="submit" class="btn btn-primary" name="btDownload" id="btDownload" href="">
+                        Telecharger le corrigé
+                    </button>
+                 </form>
+                </div>
+ 
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\EleveRattrapage;
+use App\Entity\Rattrapage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,7 +35,7 @@ class EleveRattrapageRepository extends ServiceEntityRepository
 
 
     public function updateNote($idEleve, $note){
-        $em = $this->getEntityManager();
+        $em = $this->getEntityManager();    
         $query = $em->createQuery(
             'UPDATE App\Entity\EleveRattrapage e 
             SET e.Note = :note 
@@ -45,6 +46,16 @@ class EleveRattrapageRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function updateEtatRattrapage(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'UPDATE App\Entity\Rattrapage rat
+            SET rat.EtatRattrapage = 2 
+            WHERE ( SELECT count(e.Note) FROM App\Entity\EleveRattrapage e , App\Entity\Rattrapage r WHERE e.rattrapage = r.id ) = (SELECT COUNT(ere.id) FROM App\Entity\EleveRattrapage ere , App\Entity\Rattrapage ra  WHERE ere.rattrapage = ra.id )  '
+        );
+
+        return $query->execute();
+    }
 
     // /**
     //  * @return EleveRattrapage[] Returns an array of EleveRattrapage objects
