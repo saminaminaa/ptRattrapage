@@ -91,12 +91,12 @@ class Rattrapage
         return $this->id;
     }
 
-    public function getPDF(): ?string
+    public function getPDF()
     {
         return $this->PDF;
     }
 
-    public function setPDF(string $PDF): self
+    public function setPDF($PDF): self
     {
         $this->PDF = $PDF;
 
@@ -127,12 +127,12 @@ class Rattrapage
         return $this;
     }
 
-    public function getCorrige(): ?string
+    public function getCorrige()
     {
         return $this->Corrige;
     }
 
-    public function setCorrige(?string $Corrige): self
+    public function setCorrige($Corrige): self
     {
         $this->Corrige = $Corrige;
 

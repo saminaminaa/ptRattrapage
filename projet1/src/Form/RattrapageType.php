@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class RattrapageType extends AbstractType
@@ -23,12 +24,12 @@ class RattrapageType extends AbstractType
 
             ->add('Classe',EntityType::class,array("class"=>"App\Entity\Classe","choice_label"=>"libelle"))
             ->add('moduleRattrapage',EntityType::class,array("class"=>"App\Entity\ModuleRattrapage","choice_label"=>"libelle"))
-            //->add('PDF', TextType::class)
+            ->add('PDF', FileType::class ,array('label' => 'choissisez le sujet'))
+            ->add('Corrige', FileType::class ,array('label' => 'choissisez le corrigé'))
             ->add('Surveillant',EntityType::class,array("class"=>"App\Entity\Utilisateur","choice_label"=>"nom"))
             ->add('Intervenant',EntityType::class,array("class"=>"App\Entity\Utilisateur","choice_label"=>"nom"))
             ->add('DateRattrapage', DateType::class)
             ->add('DureeRattrapage', TimeType::class)
-            ->add('Corrige', TextType::class)
             ->add('SupportSonore')
             //->add('EtatRattrapage')
             //->add('surveillant')

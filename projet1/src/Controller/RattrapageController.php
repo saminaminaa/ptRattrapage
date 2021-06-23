@@ -23,9 +23,22 @@ class RattrapageController extends AbstractController
        
         if ($request->isMethod('POST')) { 
             $form->handleRequest($request); 
-            $rattrapage->setEtatRattrapage(1);
-          //  $rattrapage->setmoduleRattrapage(18);
+            $rattrapage->setEtatRattrapage(0);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                    $file = $rattrapage->getPDF(); //recup image transmise
+                    $fichier = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move(
+                    $this->getParameter('upload_sujet'),$fichier);
+                    $rattrapage->setPDF($fichier);
+
+                    $file2 = $rattrapage->getCorrige(); //recup image transmise
+                    $fichier2 = md5(uniqid()).'.'.$file2->guessExtension();
+                    $file2->move(
+                    $this->getParameter('upload_corrige'),$fichier2);
+                    $rattrapage->setCorrige($fichier2);
+
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($rattrapage);
                 $em->flush();
@@ -124,12 +137,14 @@ class RattrapageController extends AbstractController
         $repoEleve = $em->getRepository(EleveRattrapage::class);
         $rattrapage = $repoRattrapage->find($id);
         $eleves = $repoEleve->getEleveByRattrapage($id);
-      
+        
 
         if (isset($_POST['note'])){
             $note = $_POST['note'];
             $idEleve = $_POST['idEleve'];
             $eleves = $repoEleve->updateNote($idEleve, $note);
+            $repoEleve->updateEtatRattrapage();
+            return $this->redirectToRoute('accueil');
         }
         
         if ($rattrapage==null){
@@ -216,5 +231,7 @@ class RattrapageController extends AbstractController
         'form'=>$form->createView()
         ]);
     }
+    
+    
     
 }

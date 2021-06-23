@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     images_directory: '%kernel.project_dir%/public/uploads'
+    upload_sujet: '%kernel.project_dir%/public/sujet'
+    upload_corrige: '%kernel.project_dir%/public/corrige'
 
 services:
     # default configuration for services in *this* file
