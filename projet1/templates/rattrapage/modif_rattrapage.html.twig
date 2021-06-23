@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Modif Rattrapage{% endblock %}
+{% block body %}
+{{parent()}}
+<div class="container-fluid">
+ <div class="row justify-content-center">
+ <h1 class="text-center text-primary p-4">Modifier un rattrapage</h1>
+ </div>
+ <div class="row justify-content-center">
+ <div class="col-8 bg-white p-4 m-0 text-primary">
+ {{ form_start(form) }}
+
+
+{#  <div class="form-group">
+ {{ form_label(form.PDF, "PDF (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.PDF, {'attr': {'class': 'form-control'}}) }}
+ </div> #}
+ <div class="form-group">
+ {{ form_label(form.Classe, "Classe concernée ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Classe, {'attr': {'class': 'form-control'}}) }}
+ </div>
+<div class="form-group">
+ {{ form_label(form.DateRattrapage, "Date du rattrapage (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.DateRattrapage, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group">
+ {{ form_label(form.DureeRattrapage, "Durée du rattrapage (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.DureeRattrapage, {'attr': {'class': 'form-control'}}) }}
+ </div>
+  <div class="form-group">
+ {{ form_label(form.Corrige, "Corrigé (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.Corrige, {'attr': {'class': 'form-control'}}) }}
+ </div>
+   <div class="form-group">
+ {{ form_label(form.SupportSonore, "Souhaitez vous ajouter un support sonore ? (*) ", {'label_attr': {'class': 'font-weightbold'}}) }}
+ {{ form_widget(form.SupportSonore, {'attr': {'class': 'form-control'}}) }}
+ </div>
+ <div class="form-group mx-auto text-center">
+ {{ form_widget(form.ajouter, { 'label': "Modifier", 'attr': {'class': 'btn text-white mx-auto text-center'}}) }}
+ </div>
+ {{ form_end(form) }}
+ </div>
+ </div>
+</div>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\EleveRattrapage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Eleve;
 
 /**
  * @method EleveRattrapage|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,6 +44,20 @@ class EleveRattrapageRepository extends ServiceEntityRepository
         ->setParameter('id', $idEleve);
 
         return $query->execute();
+    }
+
+    public function getNotes($idRattrapage): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e.Nom, e.Prenom, er.Note
+            FROM App\Entity\EleveRattrapage er, App\Entity\Eleve e
+            WHERE er.rattrapage = :test
+            AND er.eleve=e.id
+            '
+        )->setParameter('test', $idRattrapage);
+
+        return $query->getResult();
     }
 
 

@@ -47,7 +47,7 @@ class RattrapageController extends AbstractController
         $repoRattrapage = $em->getRepository(Rattrapage::class);
         $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
         return $this->render('rattrapage/liste_rattrapages.html.twig', [
-            'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
+            'rattrapages'=>$rattrapages // Nous passons la liste des rattrapages à la vue
         ]);
     }
 
@@ -113,7 +113,7 @@ class RattrapageController extends AbstractController
     }
 
 
-      /**
+    /**
      * @Route("/rattrapage_profile/{id}", name="rattrapage_profile", requirements={"id"="\d+"})
      */
     public function rattrapageprofile(int $id, Request $request)
@@ -143,5 +143,78 @@ class RattrapageController extends AbstractController
            
         ]);
     }    
+
+    /**
+     * @Route("/telecharger/{id}", name="telecharger", requirements={"id"="\d+"})
+     */
+    public function telecharger(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $repoEleve = $em->getRepository(EleveRattrapage::class);
+        $rattrapage=$repoRattrapage->find($id)->getId();
+        $eleve=$repoEleve->find($rattrapage);
+        $notes = $repoEleve->getNotes($id);
+        $rattrapage = $repoRattrapage->find($id);
+        $eleves = $repoEleve->getEleveByRattrapage($id);
+        //Nom des colonnes en première lignes
+        // le \n à la fin permets de faire un saut de ligne, super important en CSV
+        // le point virgule sépare les données en colonnes
+        $myVariableCSV = "Nom; Prenom; Note;\n";
+        
+        foreach($notes as $note){
+            $nom = $note['Nom'];
+            $prenom = $note['Prenom'];
+            $noteP = $note['Note'];
+                //Ajout de données (avec le . devant pour ajouter les données à la variable existante)
+                $myVariableCSV .= "$nom; $prenom ; $noteP ; \n";
+                //Si l'on souhaite ajouter un espace
+                //$myVariableCSV .= " ; ; ; \n";
+        }
+        //Autre donnée
+        //$myVariableCSV .= "Bayon; Fabien; $note;\n";
+        //On donne la variable en string à la response, nous définissons le code HTTP à 200
+        return new Response(
+            $myVariableCSV,
+            200,
+            [
+            //Définit le contenu de la requête en tant que fichier Excel
+                'Content-Type' => 'application/vnd.ms-excel',
+            //On indique que le fichier sera en attachment donc ouverture de boite de téléchargement ainsi que le nom du fichier
+                "Content-disposition" => "attachment; filename=Notes_rattrapage.csv"
+            ]
+        );
+
+
+        
+    }
+    
+    /**
+    * @Route("/modif_rattrapage/{id}", name="modif_rattrapage", requirements={"id"="\d+"})
+    */
+    public function modifRattrapage(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $rattrapage = $repoRattrapage->find($id);
+        if($rattrapage==null){
+            $this->addFlash('notice', "Ce rattrapage n'existe pas");
+            return $this->redirectToRoute('liste_rattrapages');
+        }
+        $form = $this->createForm(RattrapageType::class,$rattrapage);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request); 
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($rattrapage);
+                $em->flush();
+                $this->addFlash('notice', 'Rattrapage modifié');
+            }
+            return $this->redirectToRoute('liste_rattrapages');
+        }
+        return $this->render('rattrapage/modif_rattrapage.html.twig', [
+        'form'=>$form->createView()
+        ]);
+    }
     
 }

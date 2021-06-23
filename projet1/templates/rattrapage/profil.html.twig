@@ -63,6 +63,9 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <div style="text-align:center">
+                    <a type="submit" href="{{path('telecharger', {'id': rattrapage.id})}}" class="btn btn-primary" name="btTelecharger" id="btTelecharger">télécharger les notes au format csv</a>
+                </div>
             </div>
         </div>
     </div>
