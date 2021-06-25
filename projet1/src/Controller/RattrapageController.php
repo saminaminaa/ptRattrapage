@@ -144,7 +144,7 @@ class RattrapageController extends AbstractController
             $idEleve = $_POST['idEleve'];
             $eleves = $repoEleve->updateNote($idEleve, $note);
             $repoEleve->updateEtatRattrapage();
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('rattrapage_profile',['id' => $id]);
         }
         
         if ($rattrapage==null){
