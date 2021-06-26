@@ -29,7 +29,7 @@ class RattrapageType extends AbstractType
             ->add('DateRattrapage', DateType::class)
             ->add('DureeRattrapage', TimeType::class)
             ->add('Corrige', TextType::class)
-            ->add('SupportSonore')
+            //->add('SupportSonore')
             //->add('EtatRattrapage')
             //->add('surveillant')
             //->add('intervenant')

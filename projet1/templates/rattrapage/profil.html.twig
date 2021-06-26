@@ -51,7 +51,9 @@
                         <td>{{eleve.eleve.prenom}} </td>
                         <form method="post" action="{{path('rattrapage_profile', {'id': rattrapage.id})}}">
                         <input id="idEleve" name="idEleve" value={{eleve.eleve.id}} hidden>
+                        <input id="idRattrapage" name="idRattrapage" value={{rattrapage.id}} hidden>
                         <td><input type="number" id="note" name="note" value={{eleve.note}}></td>
+
                         <td>    <button type="submit" class="btn btn-primary" name="btInscrire" id="btInscrire" href="index"><span class="material-icons" title="Ajouter une note">save</span></button></td>
                     
 

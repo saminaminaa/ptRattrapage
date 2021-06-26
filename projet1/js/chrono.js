@@ -5,13 +5,30 @@ var btChrono = document.getElementById("btChrono");
 var splitTime = hms.split(':'); // split it at the colons
 var secondes = (+splitTime[0]) * 60 * 60 + (+splitTime[1]) * 60 + (+splitTime[2]); 
 var support = document.getElementById("support");
-var presence = document.getElementsByClassName("elevePresent");
+var Arendu = document.getElementsByClassName("eleveRendu");
+var dateRendu = document.getElementsByClassName("dateRendu")
 var buttonPressed = false;
 var epreuveTerminee = false;
-
 btChrono.addEventListener("click",lockButton)
 
-console.log(presence)
+for (let nbitem = 0; nbitem < Arendu.length ; nbitem++) {
+    Arendu[nbitem].addEventListener("click",function(){
+        if(Arendu[nbitem].checked){
+            var currentdate = new Date(); 
+            console.log(nbitem)
+            dateRendu[nbitem].value = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate() + " "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+        }else{
+            dateRendu[nbitem].value = "";
+        }
+        console.log(dateRendu)
+    })
+
+}
 
 function lockButton(){
     if(!buttonPressed){
@@ -37,7 +54,7 @@ function decrementerChrono() {
      * et on rappelle la fonction */
     if (secondes > 0) {
         secondes --;
-        if((secondes == 3600 ||secondes == 1800 || secondes == 900 || secondes == 300)&& support.value == "1"){
+        if((secondes == 3600 ||secondes == 1800 || secondes == 900 || secondes == 300)&& support.checked == "1"){
             PlaySound();
         }
         if(epreuveTerminee){
@@ -49,7 +66,10 @@ function decrementerChrono() {
         var ok = window.setTimeout("decrementerChrono()", 1000);
         //alert("ok = " + ok);
     } else {
-        PlaySound();
+        if(support.checked == "1"){
+            PlaySound();
+        }
+
         temps.innerHTML = "L'épreuve est terminée. " + "<br />";
         secondes = 300;
         epreuveTerminee = true;

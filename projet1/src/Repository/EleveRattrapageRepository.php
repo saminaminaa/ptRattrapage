@@ -32,18 +32,48 @@ class EleveRattrapageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function getEleveIdByRattrapage($idRattrapage): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e.id
+            FROM App\Entity\EleveRattrapage er, App\Entity\Eleve e
+            WHERE er.rattrapage = :test
+            AND er.eleve = e.id
+            '
+        )->setParameter('test', $idRattrapage);
 
-    public function updateNote($idEleve, $note){
+        return $query->getResult();
+    }
+
+    public function updateNote($idEleve, $note,$idRattrapage){
         $em = $this->getEntityManager();
         $query = $em->createQuery(
             'UPDATE App\Entity\EleveRattrapage e 
             SET e.Note = :note 
-            WHERE e.eleve = :id '
+            WHERE e.eleve = :idE
+            AND e.rattrapage = :idR '
         )->setParameter('note', $note)
-        ->setParameter('id', $idEleve);
+        ->setParameter('idE', $idEleve)
+        ->setParameter('idR', $idRattrapage);
 
         return $query->execute();
     }
+
+    public function updateDateHeureFin($idEleve, $dateHeureFin, $idRattrapage){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'UPDATE App\Entity\EleveRattrapage e 
+            SET e.DateHeureFin = :dateHeureFin
+            WHERE e.eleve = :idEleve 
+            AND e.rattrapage = :idRattrapage'
+        )->setParameter('dateHeureFin', $dateHeureFin)
+        ->setParameter('idEleve', $idEleve)
+        ->setParameter('idRattrapage',$idRattrapage);
+
+        return $query->execute();
+    }
+
 
 
     // /**

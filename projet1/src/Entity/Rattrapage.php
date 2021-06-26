@@ -42,11 +42,6 @@ class Rattrapage
     private $Corrige;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $SupportSonore;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $EtatRattrapage;
@@ -135,18 +130,6 @@ class Rattrapage
     public function setCorrige(?string $Corrige): self
     {
         $this->Corrige = $Corrige;
-
-        return $this;
-    }
-
-    public function getSupportSonore(): ?bool
-    {
-        return $this->SupportSonore;
-    }
-
-    public function setSupportSonore(bool $SupportSonore): self
-    {
-        $this->SupportSonore = $SupportSonore;
 
         return $this;
     }

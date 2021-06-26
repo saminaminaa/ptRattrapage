@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block javascript %} <script src="../../../js/chrono.js"></script> {% endblock %}
+{% block javascript %} <script src="../../js/chrono.js"></script> {% endblock %}
 {% block content %}
 <div class="row justify-content-center">
         <div class="col-8 p-4 m-0 text-primary">
@@ -26,21 +26,25 @@
                         <tr class="table-primary">
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
-                            <th scope="col">Présent</th>
+                            <th scope="col">A Rendu</th>
                          
                         </tr>
                     </thead>
                     <tbody>
+                    <form method="post" action="{{path('liste_rattrapagesBySurveillant')}}">                      
+                     <input class="idRattrapage" name="idRattrapage" value="{{rattrapage.id}}" hidden>
+                    {% for eleve in eleves %}
                         <tr class="table-secondary">
-
-                      {% for eleve in eleves %}
-                        <td>{{eleve.eleve.nom}} </td>
-                        <td>{{eleve.eleve.prenom}} </td>
-                        <td> <input type="checkbox" class="elevePresent" value={{eleve.eleve.id}}> </td>
-                        <input type="datetime" hidden>
+                            <td>{{eleve.eleve.nom}} </td>
+                            <td>{{eleve.eleve.prenom}} </td>
+                            <td> <input type="checkbox" name="RenduEleve{{eleve.eleve.id}}" class="eleveRendu" value = {{eleve.eleve.id}} > </td>
+                             <input class="dateRendu" name="DateRendu{{eleve.eleve.id}}" value="" hidden>
+                        </tr>
                      {% endfor %}
-                                          
-                     </tr>
+
+                    <td>    <button type="submit" class="btn btn-primary" name="btRendu" id="btRendu" href="index"><span class="material-icons" title="Enregistrer les rendus">save</span></button></td>
+                    </form>
+
             
                     </tbody>
                 </table>
@@ -48,9 +52,10 @@
         </div>
     </div>
 <div id="chrono" name="chrono"> {{rattrapage.dureeRattrapage | date('H:i:s')}} </div>
-<button id="btChrono" name="btChrono"> demarrer
-<audio src="../../../sounds/alert.wav" id="alert"></audio>
-<input id="support" value={{support}} hidden>
+<button id="btChrono" name="btChrono"> demarrer </button>
+<audio src="../../sounds/alert.wav" id="alert"></audio>
+<div>Activer le support sonore ?</div>
+<input type='checkbox' id="support">
 <input id="idRattrapage" value={{rattrapage.id}} hidden>
 
 {% endblock %}

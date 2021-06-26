@@ -46,6 +46,16 @@ class RattrapageController extends AbstractController
         $em = $this->getDoctrine();
         $repoRattrapage = $em->getRepository(Rattrapage::class);
         $rattrapages = $repoRattrapage->findBy(array(),array('EtatRattrapage'=>'ASC'));
+
+        if ($request->get('supp')!=null){
+            $rattrapage = $repoRattrapage->find($request->get('supp'));
+            if($rattrapage!=null){
+                $em->getManager()->remove($rattrapage);
+                $em->getManager()->flush();
+            }
+            return $this->redirectToRoute('liste_rattrapages');
+        }
+
         return $this->render('rattrapage/liste_rattrapages.html.twig', [
             'rattrapages'=>$rattrapages // Nous passons la liste des thèmes à la vue
         ]);
@@ -72,8 +82,50 @@ class RattrapageController extends AbstractController
     {
         $em = $this->getDoctrine();
         $repoRattrapage = $em->getRepository(Rattrapage::class);
+        $repoEleveRattrapage = $em->getRepository(EleveRattrapage::class);
         $idUser =  $this->getUser()->getUtilisateur()->getId();
         $rattrapages = $repoRattrapage->getRattrapageBySurveillant($idUser);
+
+        if(isset($_POST['btRendu'])){
+            $idRattrapage = $_POST['idRattrapage'];
+            $keys = array_keys($_POST);
+            $ARendu = false;
+            foreach($keys as $key){
+                if(strpos($key,'RenduEleve') !== false){
+                    $idsElevesRattrapage[] = substr($key,10);
+                }
+            }
+            foreach($idsElevesRattrapage as $idEleve){
+                $key = 'DateRendu'.strval($idEleve);
+                if(isset($_POST[$key])){
+                    $dateRenduElevesRattrapageById[$idEleve] = $_POST[$key];
+                }
+            }
+            foreach($dateRenduElevesRattrapageById as $key => $value){
+                $repoEleveRattrapage->updateDateHeureFin($key,$value,$idRattrapage);
+            }
+
+            $elevesRattrapages = $repoEleveRattrapage->getEleveIdByRattrapage($idRattrapage);
+            foreach($elevesRattrapages as $eleveRattrapage){
+                foreach($idsElevesRattrapage as $idEleveRattrapage){
+                    if($eleveRattrapage['id'] == $idEleveRattrapage){
+                        $ARendu = true;
+                    }
+                }
+                if($ARendu == false){
+                    $idsElevesZero[] = $eleveRattrapage['id'];
+                }
+                $ARendu = false;
+            }
+
+            foreach($idsElevesZero as $idEleveZero){
+                $repoEleveRattrapage->updateNote($idEleveZero,0,$idRattrapage);
+            }
+
+        }
+
+
+
         return $this->render('rattrapage/liste_rattrapages.html.twig', [
             'rattrapages'=>$rattrapages 
         ]);
@@ -81,9 +133,9 @@ class RattrapageController extends AbstractController
 
     
     /**
-     * @Route("/chrono_rattrapage/{id}/{support}", name="chrono_rattrapage", requirements={"id"="\d+","support"="\d+"})
+     * @Route("/chrono_rattrapage/{id}", name="chrono_rattrapage", requirements={"id"="\d+"})
      */
-    public function chronoRattrapage(int $id,int $support, Request $request): Response
+    public function chronoRattrapage(int $id, Request $request): Response
     {
         $em = $this->getDoctrine();
         $repoRattrapage = $em->getRepository(Rattrapage::class);
@@ -110,7 +162,6 @@ class RattrapageController extends AbstractController
         return $this->render('rattrapage/chrono_rattrapage.html.twig', [
             'rattrapage'=>$rattrapage,
             'date'=>$date,
-            'support'=>$support,
             'eleves'=>$eleves
         ]);
     }
@@ -132,7 +183,8 @@ class RattrapageController extends AbstractController
         if (isset($_POST['note'])){
             $note = $_POST['note'];
             $idEleve = $_POST['idEleve'];
-            $eleves = $repoEleve->updateNote($idEleve, $note);
+            $idRattrapage = $_POST['idRattrapage'];
+            $eleves = $repoEleve->updateNote($idEleve, $note,$idRattrapage);
             return $this->redirectToRoute('accueil');
         }
         

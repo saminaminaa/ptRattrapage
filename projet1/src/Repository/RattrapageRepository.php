@@ -45,6 +45,7 @@ class RattrapageRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
     // /**
     //  * @return Rattrapage[] Returns an array of Rattrapage objects
     //  */

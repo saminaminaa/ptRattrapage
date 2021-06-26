@@ -52,8 +52,8 @@
                                 <td>{{rattrapage.PDF}}</td>
                                 <td>{{rattrapage.Classe.libelle}}</td>
 
-                                <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id, 'support': rattrapage.SupportSonore} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
-                                <td><a href="" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
+                                <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
+                                <td><a href="{{path('liste_rattrapages',{'supp':rattrapage.id})}}" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
                                 <td><a href="{{path('rattrapage_profile', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Allez au profile"> update </span></a></td>
 
                             </tr>
