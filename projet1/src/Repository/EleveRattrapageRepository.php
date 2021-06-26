@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\EleveRattrapage;
+use App\Entity\Rattrapage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Eleve;
 
 /**
  * @method EleveRattrapage|null find($id, $lockMode = null, $lockVersion = null)
@@ -75,6 +77,30 @@ class EleveRattrapageRepository extends ServiceEntityRepository
     }
 
 
+    public function getNotes($idRattrapage): array
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e.Nom, e.Prenom, er.Note
+            FROM App\Entity\EleveRattrapage er, App\Entity\Eleve e
+            WHERE er.rattrapage = :test
+            AND er.eleve=e.id
+            '
+        )->setParameter('test', $idRattrapage);
+
+        return $query->getResult();
+    }
+
+    public function updateEtatRattrapage(){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'UPDATE App\Entity\Rattrapage rat
+            SET rat.EtatRattrapage = 2 
+            WHERE ( SELECT count(e.Note) FROM App\Entity\EleveRattrapage e , App\Entity\Rattrapage r WHERE e.rattrapage = r.id ) = (SELECT COUNT(ere.id) FROM App\Entity\EleveRattrapage ere , App\Entity\Rattrapage ra  WHERE ere.rattrapage = ra.id )  '
+        );
+
+        return $query->execute();
+    }
 
     // /**
     //  * @return EleveRattrapage[] Returns an array of EleveRattrapage objects

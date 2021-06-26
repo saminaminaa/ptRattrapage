@@ -27,7 +27,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -52,9 +52,25 @@
                                 <td>{{rattrapage.PDF}}</td>
                                 <td>{{rattrapage.Classe.libelle}}</td>
 
-                                <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
-                                <td><a href="{{path('liste_rattrapages',{'supp':rattrapage.id})}}" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
-                                <td><a href="{{path('rattrapage_profile', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Allez au profile"> update </span></a></td>
+                                {% if is_granted('ROLE_INTERVENANT') %}
+                                    <td><a href="{{path('rattrapage_profile', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Allez au profile"> update </span></a></td>
+
+                                {% elseif is_granted('ROLE_SURVEILLANT') %}
+                                    <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id, 'support': rattrapage.SupportSonore} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
+                                
+                                {% elseif is_granted('ROLE_RESPONSABLE') %}
+                                    <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id, 'support': rattrapage.SupportSonore} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
+                                    <td><a href="{{path('modif_rattrapage',{'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Modifier un utilisateur">create</span></a></td>
+                                    <td><a href="" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
+                                    <td><a href="{{path('rattrapage_profile', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Allez au profile"> update </span></a></td>
+                                
+                                {% elseif is_granted('ROLE_ADMIN') %}
+                                    <td><a href="{{path('chrono_rattrapage', {'id': rattrapage.id, 'support': rattrapage.SupportSonore} )}}" class="text-white"><span class="material-icons" title="Lancer un chrono">timer</span></a></td>
+                                    <td><a href="{{path('modif_rattrapage',{'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Modifier un utilisateur">create</span></a></td>
+                                    <td><a href="" class="text-white"><span class="material-icons" title="Supprimer une role"> delete </span></a></td>
+                                    <td><a href="{{path('rattrapage_profile', {'id': rattrapage.id})}}" class="text-white"><span class="material-icons" title="Allez au profile"> update </span></a></td>
+                                {% endif %}
+                               
 
                             </tr>
                         {% endfor %}
